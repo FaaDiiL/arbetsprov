@@ -1,3 +1,8 @@
+# Search ticker
+Search for a ticker symbol in the search box to get a graph of the closing price for the last 12 months.
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
