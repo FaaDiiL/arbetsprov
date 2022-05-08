@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container } from '@mui/material'
+import { Container, Typography } from '@mui/material'
 import { FooterSection } from './style'
 
 const Footer = () => {
@@ -7,7 +7,9 @@ const Footer = () => {
   return (
     <FooterSection>
       <Container maxWidth='xl'>
-        <small>Copyright {currentYear}</small>
+      <Typography variant="p" component="small" >
+        Copyright {currentYear}
+      </Typography>
       </Container>
     </FooterSection>
   )
