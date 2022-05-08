@@ -1,26 +1,14 @@
-import './App.css'
 import React, { useState } from 'react'
-import Search from './components/Search'
-import GraphClosePrice from './components/GraphClosePrice'
+import Search from '../../components/search/Search'
+import GraphClosePrice from '../../components/graph/GraphClosePrice'
 import { Container, Paper } from '@mui/material'
-import Header from './components/Header'
-import Footer from './components/Footer'
-import styled from 'styled-components'
+import Header from '../../components/header/Header'
+import Footer from '../../components/footer/Footer'
+import {MainSection} from './Landing.style'
 
-const MainSection = styled.main`
-.ticker-name {
-  padding: 20px 0;
-}
-margin:0 auto;
-  min-height: calc(100vh - 400px);
-  display:flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  
-`
 
-function App() {
+function Landing() {
+  // States
   const [fetchedData, setFetchedData] = useState([])
   const [searchFieldValue, setSearchFieldValue] = useState('')
   const [dateArray, setDateArray] = useState([])
@@ -29,13 +17,14 @@ function App() {
   return (
     <>
       <Header />
-      <MainSection  className='App'>
+      <MainSection  className='Landing'>
         <Container maxWidth='xl'>
         <Paper elevation={24} sx={{padding:'50px 50px'}} >
 
         <Search
         setTickerName={setTickerName}
           setSearchFieldValue={setSearchFieldValue}
+          searchFieldValue={searchFieldValue}
           setDateArray={setDateArray}
           setPriceArray={setPriceArray}
           setFetchedData={setFetchedData}
@@ -46,6 +35,7 @@ function App() {
           dateArray={dateArray}
           priceArray={priceArray}
           setFetchedData={setFetchedData}
+          fetchedData={fetchedData}
         />
         </Paper>
         </Container>
@@ -56,4 +46,4 @@ function App() {
   )
 }
 
-export default App
+export default Landing

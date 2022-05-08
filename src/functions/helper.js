@@ -9,5 +9,23 @@ export const fetchClosePrice = async (tickerSymbol) => {
   )
   if(!response.ok) return
   const data = await response.json()
+  console.log(data)
   return data
 }
+
+/**
+ * 
+ * @param {Array <array>} array - Array of strings 
+ * @param {Value <string>} val  - String to search for
+ * @returns 
+ */
+export const checkAvailability = (array, value) => {
+  return array.some(function(arrayValue) {
+    return value === arrayValue;
+  });
+}
+
+// check if array includes string value
+export const includesString = (array, value) => {
+  return array.includes(value);
+} // end of includes

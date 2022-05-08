@@ -24,10 +24,10 @@ ChartJS.register(
   Filler
 )
 const GraphClosePrice = ({
+  fetchedData,
   dateArray,
   priceArray,
 }) => {
-  const [fetchedData] = useState([])
   const [chartData, setChartData] = useState({
     datasets: [],
   })
@@ -47,6 +47,44 @@ const GraphClosePrice = ({
             borderWidth: 3,
           },
         ],
+      })
+      setChartOptions({
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          title: {
+            display: true,
+            text: 'End of Day Close Price',
+          },
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  beginAtZero: true,
+                  autoSkip: true,
+                  maxTicksLimit: 10,
+                },
+                gridLines: {
+                  display: false,
+                },
+              },
+            ],
+            xAxes: [
+              {
+                ticks: {
+                  beginAtZero: true,
+                  autoSkip: true,
+                  maxTicksLimit: 10,
+                },
+                gridLines: {
+                  display: false,
+                },
+              },
+            ],
+          },
+        },
       })
     }
     return () => {
