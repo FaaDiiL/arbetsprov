@@ -4,9 +4,13 @@ import './index.css'
 import reportWebVitals from './reportWebVitals'
 import Landing from './pages/landing/Landing'
 import { SnackbarProvider } from 'notistack'
+import CssBaseline from '@mui/material/CssBaseline';
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
+  <CssBaseline />
     <SnackbarProvider maxSnack={3}>
       <Landing />
     </SnackbarProvider>
