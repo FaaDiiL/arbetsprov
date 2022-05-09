@@ -1,25 +1,36 @@
+import tickersJson from '../local-json/tickers.json'
+
 /**
  *
- * @param {string} tickerSymbol - The tickersymbol as a string ex. "FB" or "AAPL"
+ * @param {string} tickerSymbol-Required -  The tickersymbol as a string ex. "FB" or "AAPL"
+ * @param {string} Limits-Optional - The tickersymbol as a string ex. "FB" or "AAPL"
  * @returns {Promise} Returns a promise with dataset_data object
  * @description This function fetches data from an API and returns a promise with the dataset_data object
  *
  */
-export const fetchTickerDatasetBySymbol = async (tickerSymbol) => {
+export const fetchTickerDatasetBySymbol = async (tickerSymbol, limits=24) => {
   let closingPrice = '4'
-  if (!tickerSymbol) return
-  const response = await fetch(
-    `https://data.nasdaq.com/api/v3/datasets/WIKI/${tickerSymbol}.json?api_key=${process.env.REACT_APP_API_KEY}&column_index=${closingPrice}&collapse=monthly&limit=52&order=desc`
-  )
+  try {
+    const response = await fetch(
+      `https://data.nasdaq.com/api/v3/datasets/WIKI/${tickerSymbol}.json?api_key=${
+        process.env.REACT_APP_API_KEY
+      }&column_index=${closingPrice}&collapse=monthly&limit=${limits}&order=desc`
+    )
 
-  // Return if the fetching failed
-  if (!response.ok) return
- 
-  // Parse the response to a json object
-  const data = await response.json()
+    if (!response) return null
+    // Return the dataset_data object
+    const data = await response.json()
 
-  // Return the dataset_data object
-  return data
+    // If any querry errors
+    // if(data?.quandl_error)return data.quandl_error
+    if (data?.quandl_error) return null
+    return data
+  } catch (error) {
+    // Return if the fetching failed
+    // console.error(error)
+    console.log(error)
+    return null
+  }
 }
 
 /**
@@ -114,3 +125,8 @@ export const initializingChartOptions = {
     },
   },
 }
+
+// Get all tickerSymbols from the tickersJson file and set them to the tickerSymbols state
+export const getTickerSymbols = tickersJson.tickers
+  .map((ticker) => ticker)
+  .map((ticker) => ticker.symbol)
