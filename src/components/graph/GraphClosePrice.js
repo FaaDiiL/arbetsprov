@@ -25,7 +25,7 @@ ChartJS.register(
   PointElement,
   Filler
 )
-const GraphClosePrice = ({ fetchedData, dateArray, priceArray }) => {  
+const GraphClosePrice = ({ fetchedData, dateArray, priceArray, tickerName }) => {  
   // ----- States -----
   const [chartData, setChartData] = useState({
     datasets: [],
@@ -50,6 +50,7 @@ const GraphClosePrice = ({ fetchedData, dateArray, priceArray }) => {
 
   return (
     <Container maxWidth={'lg'}>
+      {tickerName && <h3 className='ticker-name'>{tickerName}</h3>}
       <Line options={chartOptions} data={chartData} />
     </Container>
   )

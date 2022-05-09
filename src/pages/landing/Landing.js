@@ -29,8 +29,10 @@ function Landing() {
           setPriceArray={setPriceArray}
           setFetchedData={setFetchedData}
         />
-        {tickerName && <h3 className='ticker-name'>{tickerName}</h3>}
+
+        
         <GraphClosePrice
+        tickerName={tickerName}
           searchFieldValue={searchFieldValue}
           dateArray={dateArray}
           priceArray={priceArray}
