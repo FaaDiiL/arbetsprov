@@ -9,8 +9,8 @@ SEARCH TICKER is a Ticker Symbol search engine that provides you with a Graph th
 - Data from API
 - Error handling
 - Cross platform
-- Testing (Jest)
-
+- Testing (Jest & React Testing Library)
+- Material-UI
 
 ## Demo
 
