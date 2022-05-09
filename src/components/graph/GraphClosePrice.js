@@ -9,10 +9,12 @@ import {
   Tooltip,
   Legend,
   PointElement,
-  Filler
+  Filler,
 } from 'chart.js'
 import { Line } from 'react-chartjs-2'
+import {initializingChartData, initializingChartOptions } from '../../functions/helper'
 
+// Chart.js plugin implementation
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -23,117 +25,31 @@ ChartJS.register(
   PointElement,
   Filler
 )
-const GraphClosePrice = ({
-  fetchedData,
-  dateArray,
-  priceArray,
-}) => {
+const GraphClosePrice = ({ fetchedData, dateArray, priceArray }) => {  
+  // ----- States -----
   const [chartData, setChartData] = useState({
     datasets: [],
   })
-  const [chartOptions, setChartOptions] = useState({})
+  const [chartOptions, setChartOptions] = useState(initializingChartOptions)
+
+  // ----- Side-effect handlers -----
+  // This function runs every time one of the 'dataArray, priceArray or fetchedData' -state changes
   useEffect(() => {
     let isLoading = true
+
     if (isLoading) {
-      setChartData({
-        labels: priceArray,
-        datasets: [
-          {
-            label: 'Close Price',
-            fill: true, 
-            data: dateArray,
-            backgroundColor: '#606c3890',
-            borderColor: '#283618',
-            borderWidth: 3,
-          },
-        ],
-      })
-      setChartOptions({
-        responsive: true,
-        plugins: {
-          legend: {
-            position: 'top',
-          },
-          title: {
-            display: true,
-            text: 'End of Day Close Price',
-          },
-          scales: {
-            yAxes: [
-              {
-                ticks: {
-                  beginAtZero: true,
-                  autoSkip: true,
-                  maxTicksLimit: 10,
-                },
-                gridLines: {
-                  display: false,
-                },
-              },
-            ],
-            xAxes: [
-              {
-                ticks: {
-                  beginAtZero: true,
-                  autoSkip: true,
-                  maxTicksLimit: 10,
-                },
-                gridLines: {
-                  display: false,
-                },
-              },
-            ],
-          },
-        },
-      })
+      // Preventing memory leak
+      setChartData(initializingChartData({priceArray, dateArray}))
+      setChartOptions(initializingChartOptions)
     }
+
     return () => {
       isLoading = false
     }
   }, [dateArray, priceArray, fetchedData])
 
-  useEffect(() => {
-    setChartOptions({
-      responsive: true,
-      plugins: {
-        legend: {
-          position: 'top',
-        },
-        title: {
-          display: true,
-          text: 'End of Day Close Price',
-        },
-        scales: {
-          yAxes: [
-            {
-              ticks: {
-                beginAtZero: true,
-                autoSkip: true,
-                maxTicksLimit: 10,
-              },
-              gridLines: {
-                display: false,
-              },
-            },
-          ],
-          xAxes: [
-            {
-              ticks: {
-                beginAtZero: true,
-                autoSkip: true,
-                maxTicksLimit: 10,
-              },
-              gridLines: {
-                display: false,
-              },
-            },
-          ],
-        },
-      },
-    })
-  }, [])
   return (
-    <Container maxWidth={'lg'}  >
+    <Container maxWidth={'lg'}>
       <Line options={chartOptions} data={chartData} />
     </Container>
   )
