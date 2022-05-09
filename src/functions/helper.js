@@ -1,22 +1,24 @@
 /**
- * Fetch all closed prices for a given ticker symbol
- */
-/**
  *
  * @param {string} tickerSymbol - The tickersymbol as a string ex. "FB" or "AAPL"
- * @returns {Promise} - Returns a promise with dataset_data object
- * @description This function is used to fetch dataset_data object for a given tickersymbol
- * @json data.dataset_data - The dataset_data object
+ * @returns {Promise} Returns a promise with dataset_data object
+ * @description This function fetches data from an API and returns a promise with the dataset_data object
  *
  */
-export const fetchClosePrice = async (tickerSymbol) => {
+export const fetchTickerDatasetBySymbol = async (tickerSymbol) => {
   let closingPrice = '4'
   if (!tickerSymbol) return
   const response = await fetch(
     `https://data.nasdaq.com/api/v3/datasets/WIKI/${tickerSymbol}.json?api_key=${process.env.REACT_APP_API_KEY}&column_index=${closingPrice}&collapse=monthly&limit=52&order=desc`
   )
+
+  // Return if the fetching failed
   if (!response.ok) return
+ 
+  // Parse the response to a json object
   const data = await response.json()
+
+  // Return the dataset_data object
   return data
 }
 
@@ -25,8 +27,9 @@ export const fetchClosePrice = async (tickerSymbol) => {
  * @param {Array <array>} array - Array of strings
  * @param {Value <string>} val  - String to search for
  * @returns
+ * @description This function is used to check if a string matches any of the strings in an array
  */
-export const checkAvailability = (array, value) => {
+export const matchSearchFieldValueWithTickerSymbols = (array, value) => {
   return array.some(function (arrayValue) {
     return value === arrayValue
   })
@@ -34,11 +37,11 @@ export const checkAvailability = (array, value) => {
 
 // check if array includes string value
 /**
- * 
- * @param {*} array - Array of strings 
+ *
+ * @param {*} array - Array of strings
  * @param {*} value - Control String
  * @returns {boolean} - Returns true if array includes value
-  * @description This function is used to check if an array includes the string value 
+ * @description This function is used to check if an array includes the string value
  */
 export const includesString = (array, value) => {
   return array.includes(value)
@@ -72,7 +75,7 @@ export const initializingChartData = ({ priceArray, dateArray }) => ({
  *
  * @Description This Object to initialize chart options
  *
-*/
+ */
 export const initializingChartOptions = {
   responsive: true,
   plugins: {
