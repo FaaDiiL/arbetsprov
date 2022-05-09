@@ -3,7 +3,7 @@ import tickersJson from '../local-json/tickers.json'
 /**
  *
  * @param {string} tickerSymbol-Required -  The tickersymbol as a string ex. "FB" or "AAPL"
- * @param {string} Limits-Optional - The tickersymbol as a string ex. "FB" or "AAPL"
+ * @param {int} Limits-Optional - Type a number to get the first n rows of the dataset. Example typ: 1 to get just the latest row.
  * @returns {Promise} Returns a promise with dataset_data object
  * @description This function fetches data from an API and returns a promise with the dataset_data object
  *
@@ -14,7 +14,7 @@ export const fetchTickerDatasetBySymbol = async (tickerSymbol, limits=24) => {
     const response = await fetch(
       `https://data.nasdaq.com/api/v3/datasets/WIKI/${tickerSymbol}.json?api_key=${
         process.env.REACT_APP_API_KEY
-      }&column_index=${closingPrice}&collapse=monthly&limit=${limits}&order=desc`
+      }&column_index=${closingPrice}&collapse=monthly&limit=${+limits}&order=desc`
     )
 
     if (!response) return null
