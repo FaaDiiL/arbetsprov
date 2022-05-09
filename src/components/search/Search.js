@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import TextField from '@mui/material/TextField'
 import Autocomplete from '@mui/material/Autocomplete'
-import tickersJson from '../../local-json/tickers.json'
 import {
   fetchTickerDatasetBySymbol,
   matchSearchFieldValueWithTickerSymbols,
@@ -12,6 +11,7 @@ import Button from '@mui/material/Button'
 import SearchIcon from '@mui/icons-material/Search'
 import { Container } from '@mui/material'
 import { ThemeProvider } from '@mui/material/styles'
+import { getTickerSymbols } from '../../functions/helper'
 const Search = ({
   setFetchedData,
   setTickerName,
@@ -23,28 +23,9 @@ const Search = ({
   // Snackbar popup HOF('Higer Order Function')
   const { enqueueSnackbar } = useSnackbar()
   // ---------- States ----------
-  const [tickerSymbols, setTickerSymbols] = useState([])
+  const tickerSymbols = getTickerSymbols
   const [valueSelectedByTheUser, setValueSelectedByTheUser] = useState('')
   const [open, setOpen] = React.useState(false)
-
-  // ---------- Side-effect handlers ----------
-  useEffect(() => {
-    let isLoading = true
-
-    // Get all tickerSymbols from the tickersJson file and set them to the tickerSymbols state
-    const getTickerSymbols = tickersJson.tickers
-      .map((ticker) => ticker)
-      .map((ticker) => ticker.symbol)
-
-    if (isLoading) {
-      setTickerSymbols(getTickerSymbols)
-    }
-
-    // Cleanup function
-    return () => {
-      isLoading = false
-    }
-  }, [])
 
   /**
    *
@@ -89,10 +70,10 @@ const Search = ({
 
     setFetchedData(data)
 
-    // Cuts everything after the parentheses and saves it to the tickerName-state
+    // Removes all characters after the parentheses
     const tickerName = data.dataset.name.substring(
       0,
-      data.dataset.name.indexOf(`\)`) + 1
+      data.dataset.name.indexOf(`)`) + 1
     )
     setTickerName(tickerName)
 
@@ -173,39 +154,46 @@ const Search = ({
       }}
     >
       <SearchSection>
-    <ThemeProvider theme={theme}>
-        <form onSubmit={(event) => event.preventDefault()}>
-          <Autocomplete
-            value={searchFieldValue}
-            inputValue={searchFieldValue}
-            open={open}
-            id='combo-box-demo'
-            options={tickerSymbols}
-            freeSolo
-            getOptionLabel={(option) => option}
-            onInputChange={handleInputChange}
-            // onChange={handleInputChange}
-            onChange={changingValuesFromListNavigation}
-            renderInput={(params) => (
-              <TextField
-                color='primary'
-                {...params}
-                label='Search'
-                variant='outlined'
-                onKeyUp={handleKeyUp}
-              />
-            )}
-          />
-          <Button
-            size='medium'
-            color='primary'
-            onClick={handleSubmit}
-            variant='contained'
-            startIcon={<SearchIcon />}
-          >
-            SEARCH
-          </Button>
-        </form>
+        <ThemeProvider theme={theme}>
+          <form onSubmit={(event) => event.preventDefault()}>
+            <Autocomplete
+              value={searchFieldValue}
+              inputValue={searchFieldValue}
+              open={open}
+              id='combo-box-demo'
+              options={tickerSymbols}
+              freeSolo
+              getOptionLabel={(option) => {
+                if (typeof option === 'string') {
+                  return option
+                }
+              }}
+              onInputChange={handleInputChange}
+              // onChange={handleInputChange}
+              onChange={changingValuesFromListNavigation}
+              renderInput={(params) => (
+                <TextField
+                  data-testid='search-input'
+                  data-aria-label='search-field'
+                  color='primary'
+                  {...params}
+                  label='Search'
+                  variant='outlined'
+                  onKeyUp={handleKeyUp}
+                />
+              )}
+            />
+            <Button
+              title='search-btn'
+              size='medium'
+              color='primary'
+              onClick={handleSubmit}
+              variant='contained'
+              startIcon={<SearchIcon />}
+            >
+              SEARCH
+            </Button>
+          </form>
         </ThemeProvider>
       </SearchSection>
     </Container>
