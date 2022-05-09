@@ -1,8 +1,7 @@
 
 # SEARCH TICKER
 
-SEARCH TICKER is a TickerSymbol searchenging that provides you with 
-a Grph that show you the close prices for the ticker you search for.
+SEARCH TICKER is a Ticker Symbol search engine that provides you with a Graph that show you the the end price for the ticker you search for.
 
 
 ## Features
@@ -92,7 +91,7 @@ a Grph that show you the close prices for the ticker you search for.
 
 Takes a ticker-sybmol of Type("string") and returns a json response like the one above.
 
-#### You can read more about the API on the links bellow
+#### You can read more about the API on the links below
 
 - [Time-series Parameters](https://docs.data.nasdaq.com/docs/parameters-2)
 - [Time-series Usage](https://docs.data.nasdaq.com/docs/in-depth-usage)
@@ -110,7 +109,7 @@ If you have surge installed skip this step and continue to (step 2)
 Go to the public-folder and open the CNAME-file and Change the CNAM you like to have
 - xxxx.surge.sh
 - ex. Testing.surge.sh
-or leav it empty to let surge auto generate one for you on deployment.
+or leave it empty to let surge auto generate one for you on deployment.
 
 #### Step 3
 
