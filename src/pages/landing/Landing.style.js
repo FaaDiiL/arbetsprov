@@ -11,5 +11,4 @@ export const MainSection = styled.main`
   .ticker-name {
     padding: 20px 0;
   }
-  
 `

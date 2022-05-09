@@ -12,7 +12,10 @@ import {
   Filler,
 } from 'chart.js'
 import { Line } from 'react-chartjs-2'
-import {initializingChartData, initializingChartOptions } from '../../functions/helper'
+import {
+  initializingChartData,
+  initializingChartOptions,
+} from '../../functions/helper'
 
 // Chart.js plugin implementation
 ChartJS.register(
@@ -25,7 +28,12 @@ ChartJS.register(
   PointElement,
   Filler
 )
-const GraphClosePrice = ({ fetchedData, dateArray, priceArray, tickerName }) => {  
+const GraphClosePrice = ({
+  fetchedData,
+  dateArray,
+  priceArray,
+  tickerName,
+}) => {
   // ----- States -----
   const [chartData, setChartData] = useState({
     datasets: [],
@@ -39,7 +47,7 @@ const GraphClosePrice = ({ fetchedData, dateArray, priceArray, tickerName }) => 
 
     if (isLoading) {
       // Preventing memory leak
-      setChartData(initializingChartData({priceArray, dateArray}))
+      setChartData(initializingChartData({ priceArray, dateArray }))
       setChartOptions(initializingChartOptions)
     }
 

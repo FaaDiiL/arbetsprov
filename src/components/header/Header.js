@@ -1,8 +1,8 @@
 import React from 'react'
-import {HeaderSection} from './Header.style'
+import { HeaderSection } from './Header.style'
 
 /**
- * 
+ *
  * @returns {JSX.Element}
  * @description This is the Header component
  *

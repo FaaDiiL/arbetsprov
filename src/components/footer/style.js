@@ -5,14 +5,13 @@ export const FooterSection = styled.footer`
   width: 100%;
   height: 150px;
   background-color: #405842;
-  color:#fff;
+  color: #fff;
   margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top:50px;
-  small{ 
-       font-size:1rem;
-     }
-  
+  margin-top: 50px;
+  small {
+    font-size: 1rem;
+  }
 `
