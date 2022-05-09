@@ -28,6 +28,47 @@ SEARCH TICKER is a Ticker Symbol search engine that provides you with a Graph th
 <img src="https://user-images.githubusercontent.com/18538595/167317359-88ffb6a2-5efd-4ebf-8d9e-c07162c3eabe.png" width="45%"></img>
 <img src="https://user-images.githubusercontent.com/18538595/167317380-4c32d3c1-cb33-467c-8fd0-482af9d006b3.png" width="45%"></img> 
 
+## How to run the app
+
+Follow the steps to run the application
+#### Step 1
+Create a folder and open it from the terminal
+
+Clone the repo direct to that folder by typing 
+
+```bash
+    git clone https://github.com/FaaDiiL/arbetsprov.git .
+```
+
+#### Step 2
+
+[Sign up ](https://data.nasdaq.com/sign-up) to Nasdaq and get a API-Key.
+
+#### Step 3
+
+Create a .env file in the root folder where you cloned the repo as shown in the screenshot below by typing in the terminal
+
+![image](https://user-images.githubusercontent.com/18538595/167512252-68cf87cb-8daf-480a-9bae-533f8819aa4f.png)
+
+```bash
+    touch .env
+```
+#### Step 4
+
+Open the .env file and type: 
+
+```bash
+    REACT_APP_API_KEY = "The-API-Key"
+```
+Save the changes.
+
+#### Step 5
+You are ready to start the app.
+
+```bash
+    npm start
+```
+
 ## API Reference
 
 #### Base url
