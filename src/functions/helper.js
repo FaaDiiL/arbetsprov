@@ -155,7 +155,6 @@ export const initializeData = {
   },
 }
 
-// Get all tickerSymbols from the tickersJson file and set them to the tickerSymbols state
+// Get all ticker symbols from the tickersJson file
 export const getTickerSymbols = tickersJson.tickers
-  .map((ticker) => ticker)
   .map((ticker) => ticker.symbol)
