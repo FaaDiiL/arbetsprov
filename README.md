@@ -1,7 +1,7 @@
 
 # SEARCH TICKER
 
-SEARCH TICKER is a Ticker Symbol search engine that provides you with a Graph that show you the the end price for the ticker you search for.
+SEARCH TICKER is a ticker symbol search engine that provides you with a Graph that show you the the end price for the ticker you search for.
 
 
 ## Features
@@ -130,7 +130,7 @@ You are ready to start the app.
 
 #### fetchTickerDatasetBySymbol("FB")
 
-Takes a ticker-sybmol of Type("string") and returns a json response like the one above.
+Takes a ticker symbol of Type("string") and returns a json response like the one above.
 
 #### You can read more about the API on the links below
 
